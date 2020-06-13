@@ -25,11 +25,6 @@
 #include "s3.h"
 #include "s3internal.h"
 
-#ifdef LINUX
-#include <bsd/string.h>
-#endif
-#include <string.h>
-
 void 
 s3_bucket_entry_free(struct s3_bucket_entry *entry) {
 	if (entry->key)
@@ -182,7 +177,7 @@ s3_list_bucket(struct S3 *s3, const char *bucket, const char *prefix) {
 	date = s3_make_date();
 
 	asprintf(&sign_data, "%s\n\n\n%s\n/%s/", method, date, bucket);	
-      	asprintf(&url, "http://%s.%s/?delimiter=/%s%s", bucket, s3->base_url, prefix ? "&prefix=" : "", prefix ? prefix : "");
+	asprintf(&url, "http://%s.%s/?delimiter=\"/\"%s\"%s\"", bucket, s3->base_url, prefix ? "&prefix=" : "", prefix ? prefix : "");
 
 	s3_perform_op(s3, method, url, sign_data, date, str, NULL, NULL, NULL);
 

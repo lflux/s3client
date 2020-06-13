@@ -1,5 +1,5 @@
 CFLAGS=-g -Wall -I/usr/include/libxml2 -DLINUX -D_GNU_SOURCE=1
-LDFLAGS=-lcrypto -lcurl -lssl -lxml2 -lbsd
+LDFLAGS=-lcrypto -lcurl -lssl -lxml2
 
 OBJS=s3test.o s3string.o s3digest.o s3ops.o s3xml.o s3bucket.o
 
