@@ -28,6 +28,18 @@
 #include "s3.h"
 #include "s3internal.h"
 
+#ifdef LINUX
+size_t strlcpy(char *dst, const char *src, size_t size) {
+	size_t i;
+	for (i = 0; (i < (size - 1)) && (src[i] != 0); ++i) {
+		dst[i] = src[i];
+	}
+	dst[i] = 0;
+
+	return i;
+}
+#endif
+
 size_t
 s3_string_curl_writefunc(void *ptr, size_t len, size_t nmemb, struct s3_string *s) {
 	size_t new_len = s->len + len  *nmemb;

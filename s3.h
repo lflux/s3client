@@ -25,13 +25,13 @@
 #ifndef _S3_H
 #define _S3_H
 
-#ifdef LINUX
-#include <bsd/string.h>
-#endif
-
 #include <string.h>
 #include <sys/queue.h>
 #include "s3xml.h"
+
+#ifdef LINUX
+size_t strlcpy(char *dst, const char *src, size_t size);
+#endif
 
 #define S3_SECRET_LENGTH 128
 #define S3_ID_LENGTH 128
